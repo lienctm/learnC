@@ -46,7 +46,7 @@ int getint(int *pn)
 
   if( c != EOF )
     ungetch(c);
-  printf("lien %c \n", c);
+
   return c;
 }
 
