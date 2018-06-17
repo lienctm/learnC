@@ -1,1 +1,1 @@
-This is my code for learning `The C programming langauge`
+This is my code for learning `The C programming language`
