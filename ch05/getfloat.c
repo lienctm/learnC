@@ -3,8 +3,9 @@
 #define SIZE 100
 
 int main() {
-  int n, array[SIZE];
-  float getfloat (float *);
+  int n;
+  float array[SIZE];
+  int getfloat (float *);
 
   for(n = 0; n < SIZE && getfloat(&array[n]) != EOF; n++);
 
@@ -17,6 +18,6 @@ int main() {
 float getch(void);
 void ungetch(float);
 
-float getfloat (float *pn) {
+int getfloat (float *pn) {
 
 }
