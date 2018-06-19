@@ -1,6 +1,6 @@
 /* swap - normal function :
- * working based on value copy of each input
- * if inputs were changed, result will not be changed */
+ * swap inside funtion
+ * doesn't change the input */
 
 #include<stdio.h>
 
