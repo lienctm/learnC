@@ -2,7 +2,6 @@
  * concatenate the string t to the end of the string s */
 
 #include<stdio.h>
-#include<string.h>
 
 void strcat1(char s[], char t[])   {
   int i, j;
@@ -17,6 +16,6 @@ void strcat1(char s[], char t[])   {
 int main() {
   char s[50] = "hello,";
   char t[30] = "world";
-  strcat(s,t);
+  strcat1(s,t);
   printf(" new string is : %s \n", s);
 }
