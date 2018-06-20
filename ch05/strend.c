@@ -13,10 +13,7 @@ int strend(char s[], char t[]) {
     i-- ;
     j-- ;
   }
-  if(j < 0)
-    return 1;   /* found  t occurs at the end of s */
-  else
-    return 0;   /* not found */
+  return (j < 0) ;     /* found */
 }
 
 int main() {
