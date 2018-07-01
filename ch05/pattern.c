@@ -23,8 +23,8 @@ int main(int argc, char *argv[]) {
   int lineno = 0;
 
   // *++argv : a pointer to an argument string
-  // (*++argv)[0] : a pointer to the 1st character of an argument string
-  // *(++argv[0]) : a pointer to next character of an argument string
+  // (*++argv)[0] : the 1st character of an argument string
+  // *(++argv[0]) : the next character of an argument string
 
   while(--argc > 0 && (*++argv)[0] == '-')
     while((c = *(++argv[0])))
