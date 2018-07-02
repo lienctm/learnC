@@ -39,7 +39,6 @@ void writelines(char *lineptr[], int nlines) {
 
   for(i = 0; i < nlines; i++)
     printf("%s\n", lineptr[i]);
-
 }
 
 void swap(char *v[], int i, int j) {
