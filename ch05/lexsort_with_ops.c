@@ -52,7 +52,8 @@ void swap(char *v[], int i, int j) {
 
 // strcmp1 :compare 2 strings but A and a compare equal
 int valid(char c) {
-  return isalpha(c) || isspace(c);
+  return isalnum(c) || isspace(c);
+  //return isalpha(c) || isspace(c);
 }
 
 int strcmp1(char *s, char *t, int fold, int dir) {
@@ -65,18 +66,23 @@ int strcmp1(char *s, char *t, int fold, int dir) {
         i++;
       while(t[j] != '\0' && !valid(t[j]))
         j++;
+      //printf("s=%s, t=%s, i=%d, j=%d\n", s, t, i, j);
     }
-
     a = fold ? tolower(s[i]) : s[i];
     b = fold ? tolower(t[j]) : t[j];
-
     // a and b are not '\0' so 10 and 1, a=b='1'
 
     if(a != b)
       break;
 
-    i++;
-    j++;
+    //if(s[i] == '\0' || t[j] == '\0')
+    //  break;
+    //i++;
+    //j++;
+
+    if (s[i] != '\0') i++;
+    if (t[j] != '\0') j++;
+
   }
   a = fold ? tolower(s[i]) : s[i];
   b = fold ? tolower(t[j]) : t[j];
