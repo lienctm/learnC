@@ -1,9 +1,14 @@
+//Description : comparing between const pointer & pointer to const
+
 #include<stdio.h>
 int main() {
-  int x=5;
-  int y=10;
+  int x= 1, y = 10;
 
-  int const *p = &x;
+  int * const ptr1 = &x;  // Constant pointer to int
+  ptr1 = &y;  // Error <no change address>
+  *ptr1 = 10;  // Ok
 
-  printf("%d \n", x);
+  const int *ptr2 = &x; // Pointer to constant int
+  ptr2 = &y;  // Ok
+  *ptr2 = 1;  // Error <no change value>
 }
