@@ -1,5 +1,5 @@
 // Description : this program evaluates a reverse Polish expression
-// which each operatior and operand is a separate argument
+// each operator follows its operands
 
 #include<stdio.h>
 #include<stdlib.h>

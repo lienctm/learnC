@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include<ctype.h>
 
 #define MAXLINE 100
 #define MAXLEN  100
@@ -49,8 +50,36 @@ void swap(char *v[], int i, int j) {
   v[j] = tmp;
 }
 
+// strcmp1 :compare 2 strings but A and a compare equal
+int valid(char c) {
+  return isalpha(c) || isspace(c);
+}
+
+int strcmp1(char *s, char *t, int fold, int dir) {
+  int i = 0, j = 0;
+  char a = fold ? tolower(*s) : *s;
+  char b = fold ? tolower(*t) : *t;
+
+  while(s[i] != '\0' && t[j] != '\0') {
+    if(dir) {
+      while(s[i] != '\0' && !valid(s[i]))
+        i++;
+      while(t[j] != '\0' && !valid(t[j]))
+        j++;
+    }
+    a = fold ? tolower(s[i]) : s[i];
+    b = fold ? tolower(t[j]) : t[j];
+    if(a != b)
+      break;
+    i++;
+    j++;
+  }
+  return a - b;
+}
+
+
 void qsort1(
-    char *s[], int left, int right, int (*comp)(const char*, const char *)) {
+    char *s[], int left, int right, int fold, int dir, int r) {
   int i, last;
 
   if(left >= right)
@@ -58,27 +87,15 @@ void qsort1(
   swap(s, left, (left + right) / 2);
   last = left;
   for(i = left + 1; i <= right; i++)
-    //if(comp(s[i], s[left]) < 0) // OK
-    if((*comp)(s[i], s[left]) > 0)
+    if((r && strcmp1(s[i], s[left], fold, dir) < 0)
+        || (!r && strcmp1(s[i], s[left], fold, dir) > 0))
       swap(s, ++last, i);
   swap(s, left, last);
 
-  qsort1(s, left, last - 1, comp);
-  qsort1(s, last + 1, right, comp);
+  qsort1(s, left, last - 1, fold, dir, r);
+  qsort1(s, last + 1, right, fold, dir, r);
 }
 
-int numcmp(const char *s1, const char *s2) {
-  double v1, v2;
-
-  v1 = atof(s1);
-  v2 = atof(s2);
-  if(v1 > v2)
-    return 1;
-  if(v1 < v2)
-    return -1;
-  else
-    return 0;
-}
 
 void myfree(char **p, int n) {
   int k;
@@ -87,19 +104,37 @@ void myfree(char **p, int n) {
   }
 }
 
+
 int main(int argc, char *argv[]) {
   int nlines;           // number of input lines read
-  int numeric = 0;
   char *lineptr[MAXLINE];
+  int fold = 0, dir = 0, r=0;
+  char c;
 
-  if(argc > 1 && strcmp(argv[1], "-n") == 0)
-    numeric = 1;        // numeric sort
+
+  // read args start with -
+  // loop through each char
+  // switch(c) check for each case
+
+  while(--argc > 0 && (*++argv)[0] == '-')
+    while((c = *++argv[0]))
+      switch(c) {
+        case 'r':
+          r = 1;
+          break;
+        case 'f':
+          fold = 1;
+          break;
+        case 'd':
+          dir = 1;
+          break;
+        defaul :
+          printf("illegal option argument\n");
+          break;
+      }
+
   if((nlines = readlines(lineptr, MAXLINE)) >= 0) {
-
-    //int (*f)(const char *, const char *) = numeric ? numcmp : strcmp; // OK
-    int (*f)(const char *, const char *) = numeric ? &numcmp : &strcmp;
-
-    qsort1(lineptr, 0, nlines -1, f);
+    qsort1(lineptr, 0, nlines -1, fold, dir, r);
     printf("-----------------------\n");
     writelines(lineptr, nlines);
 

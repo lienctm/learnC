@@ -133,13 +133,13 @@ int main(int argc, char *argv[]) {
     while((c = *++argv[0]))
       switch(c) {
         case 'r':
-          r = 1;
+          r = 1;  // r : sorting in reverse
           break;
         case 'f':
-          fold = 1;
+          fold = 1;  // fold : upper & lower case are equal
           break;
         case 'd':
-          dir = 1;
+          dir = 1;  // dir : cmp only on letters, numbers,blanks
           break;
         defaul :
           printf("illegal option argument\n");
